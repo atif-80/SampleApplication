@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "UPLOAD_SERVER_URL=https://uat.nxradar.com/upload" >> $GITHUB_ENV
           echo "NXRADAR_ORG_ID=ZQZBQ0B0FC" >> $GITHUB_ENV
-          echo "NXRADAR_API_TOKEN=temp_69579bf5cadba6c65a4dbd97_1767349384385_u1xk9v4irg" >> $GITHUB_ENV
+          echo "NXRADAR_API_TOKEN=temp_6957adc341d4f2d6d09e2bc8_1767353826095_pjf5y6neu8" >> $GITHUB_ENV
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
@@ -50,7 +50,7 @@ jobs:
             -H "Authorization: Bearer $NXRADAR_API_TOKEN" \
             -H "Content-Type: multipart/form-data" \
             -F "file=@./sbom.json" \
-            -F "applicationId=69579bf5cadba6c65a4dbd97" \
+            -F "applicationId=6957adc341d4f2d6d09e2bc8" \
             -F "clientId=695275f14e90ec53d701c223" \
             -F "repository=${{ github.repository }}" \
             -F "branch=${{ github.ref_name }}" \
@@ -64,7 +64,7 @@ jobs:
           curl -X POST "$UPLOAD_SERVER_URL/api/v1/sbom/github/webhook/success" \
             -H "Authorization: Bearer $NXRADAR_API_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"repository\": \"${{ github.repository }}\", \"workflow_run_id\": \"${{ github.run_id }}\", \"status\": \"success\", \"applicationId\": \"69579bf5cadba6c65a4dbd97\", \"organizationId\": \"$NXRADAR_ORG_ID\", \"sbom_file\": \"sbom.json\"}"
+            -d "{\"repository\": \"${{ github.repository }}\", \"workflow_run_id\": \"${{ github.run_id }}\", \"status\": \"success\", \"applicationId\": \"6957adc341d4f2d6d09e2bc8\", \"organizationId\": \"$NXRADAR_ORG_ID\", \"sbom_file\": \"sbom.json\"}"
       - name: Notify NXRadar on Failure
         if: failure()
         run: |
@@ -72,7 +72,7 @@ jobs:
           curl -X POST "$UPLOAD_SERVER_URL/api/v1/sbom/github/webhook/failure" \
             -H "Authorization: Bearer $NXRADAR_API_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"repository\": \"${{ github.repository }}\", \"workflow_run_id\": \"${{ github.run_id }}\", \"status\": \"failure\", \"applicationId\": \"69579bf5cadba6c65a4dbd97\", \"organizationId\": \"$NXRADAR_ORG_ID\"}"
+            -d "{\"repository\": \"${{ github.repository }}\", \"workflow_run_id\": \"${{ github.run_id }}\", \"status\": \"failure\", \"applicationId\": \"6957adc341d4f2d6d09e2bc8\", \"organizationId\": \"$NXRADAR_ORG_ID\"}"
       - name: Cleanup - Remove Workflow
         if: always()
         run: |
